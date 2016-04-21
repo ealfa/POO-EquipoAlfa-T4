@@ -4,18 +4,17 @@
  * and open the template in the editor.
  */
 package poo.t4;
-
 /**
  *
- * @author jesus_ignacio_159
+ * @author osilru
  */
 public class POOT4 {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) {        
+        //Swing
+        Menu menu = new Menu();
     }
-    
 }

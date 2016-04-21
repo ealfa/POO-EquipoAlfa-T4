@@ -7,35 +7,30 @@ package poo.t4;
 
 import javax.swing.*;
 import java.awt.event.*;
-
 /**
  *
  * @author osilru
  */
-public class Ventana1 extends JFrame implements ActionListener {
-
+public class Ventana3 extends JFrame implements ActionListener {
+    
+    
     //Declaramos las propiedades
-    private JButton btnAceptar, btnCancelar;
-    private JTextField txtNombre, txtEmail, txtTelefono, txtIDTarjeta;
+    private JButton btnAceptar, btnCancelar;    
+    private JTextField txtIDTarjeta, txtCantidad;
 
     //Constructor
-    public Ventana1() {
-        super("Alta de Cliente");
-        setSize(400, 230);  //Establecemos las dimensiones del formulario (ancho x alto)
+    public Ventana3() {
+        super("Pagos");
+        setSize(400, 165);  //Establecemos las dimensiones del formulario (ancho x alto)
         setLocation(440, 100); //Establecemos la ubicación en pantalla (x,y)
         setResizable(false); //Para que no se pueda modificar el tamaño de la ventana
 
         //Paso 2. Vamos a crear una etiqueta
-        JLabel lblNombre = new JLabel("Nombre: ");
-        JLabel lblEmail = new JLabel("Email:");
-        JLabel lblTelefono = new JLabel("Teléfono:");
         JLabel lblIDTarjeta = new JLabel("No. Tarjeta:");
-
+        JLabel lblCantidad = new JLabel("Cantidad:");
+        
         //Paso 3. Vamos a crear un campo de texto
-        txtNombre = new JTextField();
-        txtEmail = new JTextField();
-        txtTelefono = new JTextField();
-        //JTextField que limita el que solo se puedan escribir números
+        //JTextField que limita el que solo se puedan escribir numeros
         txtIDTarjeta = new JTextField();
         txtIDTarjeta.addKeyListener(new KeyAdapter() {
             @Override
@@ -47,7 +42,22 @@ public class Ventana1 extends JFrame implements ActionListener {
                 }
             }
         });
-
+        //JTextField que solo permite numeros, punto y coma
+        txtCantidad = new JTextField();
+        txtCantidad.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if ((((c < '0') || (c > '9')) && ((c != '.') && (c != ','))) && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume();  // ignore event
+                    getToolkit().beep(); //sonido
+                } else if (txtCantidad.getText()!= null && ((txtCantidad.getText().contains(".") && ((c == ',') || (c == '.'))) || (txtCantidad.getText().contains(",")&& ((c == ',') || (c == '.'))))){
+                    e.consume();  // ignore event
+                    getToolkit().beep(); //sonido
+                }
+            }
+        });
+        
         //Paso 4. Vamos a crear un botón.
         btnAceptar = new JButton("Aceptar");
         btnCancelar = new JButton("Cancelar");
@@ -56,26 +66,18 @@ public class Ventana1 extends JFrame implements ActionListener {
         JPanel pnlContenido = new JPanel(null); //Gestor nulo, util al usar setBounds
 
         //Paso 6. Ubicamos los elementos en el contenedor
-        lblNombre.setBounds(10, 30, 60, 10); //x,y, ancho y alto
-        txtNombre.setBounds(80, 25, 290, 25);
-        lblEmail.setBounds(10, 60, 60, 10);
-        txtEmail.setBounds(80, 55, 290, 25);
-        lblTelefono.setBounds(10, 90, 60, 10);
-        txtTelefono.setBounds(80, 85, 290, 25);
-        lblIDTarjeta.setBounds(10, 120, 80, 15);
-        txtIDTarjeta.setBounds(80, 115, 290, 25);
-        btnAceptar.setBounds(100, 150, 90, 25);
-        btnCancelar.setBounds(200, 150, 90, 25);
-
+        lblIDTarjeta.setBounds(10, 30, 80, 15); //x,y, ancho y alto
+        txtIDTarjeta.setBounds(80, 25, 290, 25);
+        lblCantidad.setBounds(10, 60, 60, 10);
+        txtCantidad.setBounds(80, 55, 290, 25);
+        btnAceptar.setBounds(100, 85, 90, 25);
+        btnCancelar.setBounds(200, 85, 90, 25);
+        
         //Paso 7. Agreguemos los componentes al contenedor
-        pnlContenido.add(lblNombre);
-        pnlContenido.add(txtNombre);
-        pnlContenido.add(lblEmail);
-        pnlContenido.add(txtEmail);
-        pnlContenido.add(lblTelefono);
-        pnlContenido.add(txtTelefono);
         pnlContenido.add(lblIDTarjeta);
         pnlContenido.add(txtIDTarjeta);
+        pnlContenido.add(lblCantidad);
+        pnlContenido.add(txtCantidad);
         pnlContenido.add(btnAceptar);
         pnlContenido.add(btnCancelar);
 
@@ -97,19 +99,19 @@ public class Ventana1 extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAceptar) {
-            String nombreDeCliente = txtNombre.getText();
-            String email = txtEmail.getText();
-            String telefono = txtTelefono.getText();
             String IDTarjeta = txtIDTarjeta.getText();
-            
-            if (Cliente.agregarCliente(nombreDeCliente, email, telefono, IDTarjeta)){
-                JOptionPane.showMessageDialog(null, "Se ha agregado con éxito", "", -1);
+            String cantidad = txtCantidad.getText();            
+
+        // Similar a Ventana 1, en el if debería ir el argumento que checa lo que 
+            if (MonederoElectronico.pago(IDTarjeta, cantidad)){
+                JOptionPane.showMessageDialog(null, "Se ha pagado con éxito", "", -1);
                 salir();
             } else{
-                JOptionPane.showMessageDialog(null, "No se ha podido agregar", "Advertencia", 0);                
-            }            
+                JOptionPane.showMessageDialog(null, "No se ha podido hacer el pago", "Advertencia", 0);                
+            }
         } else {
             salir();
         }
     }
 }
+
