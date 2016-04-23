@@ -24,7 +24,7 @@ public class Ventana1 extends JFrame implements ActionListener {
     private JTextField txtNombre, txtEmail, txtTelefono, txtIDTarjeta;
 
     //Constructor
-    public Ventana1() throws IOException {
+    public Ventana1() {
         super("Alta de Cliente");
         //setContentPane(new JLabel(new ImageIcon("/Users/jesusignacio159/Downloads/Drawing-layerExport.jpeg")));
         setSize(400, 230);  //Establecemos las dimensiones del formulario (ancho x alto)
@@ -108,7 +108,7 @@ public class Ventana1 extends JFrame implements ActionListener {
 
         //Paso 8. Asociamos el contenedor a la ventana
         setContentPane(pnlContenido);
-        this.getContentPane().add(new JPanelWithBackground("Drawing-layerExport.jpeg"));
+        //this.getContentPane().add(new JPanelWithBackground("Drawing-layerExport.jpeg"));
 
         //Paso 9. Escucha de eventos.
         btnAceptar.addActionListener(this);
@@ -142,8 +142,7 @@ public class Ventana1 extends JFrame implements ActionListener {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Ventana1.class
-                        .getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Ventana1.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             salir();

@@ -24,7 +24,7 @@ public class Ventana5 extends JFrame implements ActionListener {
 
     //Constructor
     public Ventana5() {
-        super("Configuracion");
+        super("Configuración");
         setContentPane(new JLabel(new ImageIcon("/Users/jesusignacio159/NetBeansProjects/POO-T4/logo.png")));
         setSize(400, 230);  //Establecemos las dimensiones del formulario (ancho x alto)
         setLocation(440, 100); //Establecemos la ubicación en pantalla (x,y)
@@ -86,11 +86,10 @@ public class Ventana5 extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAceptar) {
-
             String configuracion = txtConfiguracion.getText();
            /*
             try {
-                if (Cliente.cambiarConfiguracion(configuracion)) {
+                if (MonederoElectronico.cambiarConfiguracion(configuracion)) {
                     JOptionPane.showMessageDialog(null, "Se ha agregado con éxito", "", -1);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha podido agregar", "Advertencia", 0);

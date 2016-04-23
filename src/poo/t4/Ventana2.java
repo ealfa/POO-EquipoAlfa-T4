@@ -22,7 +22,7 @@ public class Ventana2 extends JFrame implements ActionListener {
     private JTextField txtIDTarjeta, txtTicket,txtCantidad;
 
     //Constructor
-    public Ventana2() throws IOException {
+    public Ventana2() {
         super("Registro de Compras");
         setSize(400, 200);  //Establecemos las dimensiones del formulario (ancho x alto)
         setLocation(440, 100); //Establecemos la ubicación en pantalla (x,y)
@@ -104,7 +104,7 @@ public class Ventana2 extends JFrame implements ActionListener {
 
         //Paso 8. Asociamos el contenedor a la ventana
         setContentPane(pnlContenido);
-        this.getContentPane().add(new JPanelWithBackground("Drawing-layerExport.jpeg"));
+        //this.getContentPane().add(new JPanelWithBackground("Drawing-layerExport.jpeg"));
 
         //Paso 9. Escucha de eventos.
         btnAceptar.addActionListener(this);
