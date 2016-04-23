@@ -7,6 +7,9 @@ package poo.t4;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -77,7 +80,11 @@ public class Menu extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cmdAltaCliente){
-            Ventana1 ventana1 = new Ventana1();   
+            try {   
+                Ventana1 ventana1 = new Ventana1();
+            } catch (IOException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (e.getSource() == cmdRegistroCompra){
             Ventana2 ventana2 = new Ventana2();
         } else if (e.getSource() == cmdPagos){
