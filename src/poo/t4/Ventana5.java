@@ -31,14 +31,9 @@ public class Ventana5 extends JFrame implements ActionListener {
         setResizable(false); //Para que no se pueda modificar el tamaño de la ventana
 
         //Paso 2. Vamos a crear una etiqueta
-        JLabel lblConfiguracion = new JLabel("Configuracion: ");
+        JLabel lblConfiguracion = new JLabel("Porcentaje de Acomulado: ");
 
         //Paso 3. Vamos a crear un campo de texto
-        
-        
-        //JTextField que limita el que solo se puedan escribir diez números.
-        
- 
         //JTextField que limita el que solo se puedan escribir números
         txtConfiguracion = new JTextField();
         txtConfiguracion.addKeyListener(new KeyAdapter() {
@@ -52,7 +47,6 @@ public class Ventana5 extends JFrame implements ActionListener {
             }
         });
 
-        
         //Paso 4. Vamos a crear un botón.
         btnAceptar = new JButton("Aceptar");
         btnCancelar = new JButton("Cancelar");
