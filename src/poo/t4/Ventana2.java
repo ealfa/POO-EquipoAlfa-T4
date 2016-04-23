@@ -7,6 +7,9 @@ package poo.t4;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author osilru
@@ -121,12 +124,16 @@ public class Ventana2 extends JFrame implements ActionListener {
             String ticket = txtTicket.getText();
             String cantidad = txtCantidad.getText();            
 
-        // Similar a Ventana 1, en el if debería ir el argumento que checa lo que 
-            if (Bitacora.registrarCompra(IDTarjeta, ticket, cantidad)){
-                JOptionPane.showMessageDialog(null, "Se ha registrado con éxito", "", -1);
-                salir();
-            } else{
-                JOptionPane.showMessageDialog(null, "No se ha podido registrar", "Advertencia", 0);                
+            try {
+                // Similar a Ventana 1, en el if debería ir el argumento que checa lo que
+                if (Bitacora.registrarCompra(IDTarjeta, ticket, cantidad)){
+                    JOptionPane.showMessageDialog(null, "Se ha registrado con éxito", "", -1);
+                    salir();
+                } else{                
+                    JOptionPane.showMessageDialog(null, "No se ha podido registrar", "Advertencia", 0);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Ventana2.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             salir();

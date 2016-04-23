@@ -30,7 +30,7 @@ public class Cliente {
         try{
         mysqlConnection con = new mysqlConnection();
         con.conexion();
-        Connection cc= con.conexion();
+        Connection cc = con.conexion();
         String query = "insert into clientes (nombre, email, telefono, numtarjetaC, idTarjetaC) values (?, ?, ?, ?, ?)";
       PreparedStatement preparedStmt = cc.prepareStatement(query);
       preparedStmt.setString (1, nombreDeCliente);

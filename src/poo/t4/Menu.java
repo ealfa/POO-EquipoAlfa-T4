@@ -13,8 +13,8 @@ import java.awt.event.*;
  * @author osilru
  */
 public class Menu extends JFrame implements ActionListener {
-    JMenuItem cmdAltaCliente, cmdRegistroCompra, cmdPagos, cmdConsultaSaldo;
-    JMenu menuClientes, menuMovimientos;
+    JMenuItem cmdAltaCliente, cmdRegistroCompra, cmdPagos, cmdConsultaSaldo, cmdConfiguracion;
+    JMenu menuClientes, menuMovimientos, menuConfiguracion;
     JMenuBar braMenu;
     
     //Constructor
@@ -42,6 +42,7 @@ public class Menu extends JFrame implements ActionListener {
         //Paso 2. Creamos los JMenus
         menuClientes = new JMenu("Clientes");
         menuMovimientos = new JMenu("Movimientos");
+        menuConfiguracion = new JMenu("Configuracion");
         
         //Paso 3. Creamos la Barra JMenuBar
         braMenu = new JMenuBar();
@@ -51,10 +52,12 @@ public class Menu extends JFrame implements ActionListener {
         menuMovimientos.add(cmdRegistroCompra);
         menuMovimientos.add(cmdPagos);
         menuMovimientos.add(cmdConsultaSaldo);
+        menuConfiguracion.add(cmdConfiguracion);
         
         //Paso 5. Agregar los menus a la barra
         braMenu.add(menuClientes);
         braMenu.add(menuMovimientos);
+        braMenu.add(menuConfiguracion);
         setJMenuBar(braMenu);        
         setVisible(true);
         
@@ -62,7 +65,8 @@ public class Menu extends JFrame implements ActionListener {
         cmdAltaCliente.addActionListener(this);
         cmdRegistroCompra.addActionListener(this);
         cmdPagos.addActionListener(this);
-        cmdConsultaSaldo.addActionListener(this);        
+        cmdConsultaSaldo.addActionListener(this);
+        cmdConfiguracion.addActionListener(this);    
     }
     
 //    private void salir(){
@@ -79,6 +83,8 @@ public class Menu extends JFrame implements ActionListener {
             Ventana3 ventana3 = new Ventana3();
         } else if (e.getSource() == cmdConsultaSaldo){
             Ventana4 ventana4 = new Ventana4();
+        } else if (e.getSource() == cmdConfiguracion){
+            Ventana5 ventana5 = new Ventana5();
         }
     }
 }
