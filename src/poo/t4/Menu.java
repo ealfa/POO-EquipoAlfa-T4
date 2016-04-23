@@ -37,6 +37,7 @@ public class Menu extends JFrame implements ActionListener {
         cmdRegistroCompra = new JMenuItem("Registro de Compras");
         cmdPagos = new JMenuItem("Pagos");
         cmdConsultaSaldo = new JMenuItem("Consulta de Saldo");
+        cmdConfiguracion = new JMenuItem("Configuración");
         
        
         //Paso 2. Creamos los JMenus
