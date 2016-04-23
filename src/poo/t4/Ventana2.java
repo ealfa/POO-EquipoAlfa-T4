@@ -7,6 +7,7 @@ package poo.t4;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,13 +17,12 @@ import java.util.logging.Logger;
  */
 public class Ventana2 extends JFrame implements ActionListener {
     
-    
     //Declaramos las propiedades
     private JButton btnAceptar, btnCancelar;    
     private JTextField txtIDTarjeta, txtTicket,txtCantidad;
 
     //Constructor
-    public Ventana2() {
+    public Ventana2() throws IOException {
         super("Registro de Compras");
         setSize(400, 200);  //Establecemos las dimensiones del formulario (ancho x alto)
         setLocation(440, 100); //Establecemos la ubicación en pantalla (x,y)
@@ -104,6 +104,7 @@ public class Ventana2 extends JFrame implements ActionListener {
 
         //Paso 8. Asociamos el contenedor a la ventana
         setContentPane(pnlContenido);
+        this.getContentPane().add(new JPanelWithBackground("Drawing-layerExport.jpeg"));
 
         //Paso 9. Escucha de eventos.
         btnAceptar.addActionListener(this);
@@ -128,7 +129,6 @@ public class Ventana2 extends JFrame implements ActionListener {
                 // Similar a Ventana 1, en el if debería ir el argumento que checa lo que
                 if (Bitacora.registrarCompra(IDTarjeta, ticket, cantidad)){
                     JOptionPane.showMessageDialog(null, "Se ha registrado con éxito", "", -1);
-                    salir();
                 } else{                
                     JOptionPane.showMessageDialog(null, "No se ha podido registrar", "Advertencia", 0);
                 }

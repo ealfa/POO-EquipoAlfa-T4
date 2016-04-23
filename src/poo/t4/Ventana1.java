@@ -39,7 +39,18 @@ public class Ventana1 extends JFrame implements ActionListener {
 
         //Paso 3. Vamos a crear un campo de texto
         txtNombre = new JTextField();
+        
         txtEmail = new JTextField();
+        txtEmail.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if ((((c < '0') || (c > '9')) && ((c != '@') && (c != '-'))) && (c != '_') && (c != '.') && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume();  // ignore event
+                    getToolkit().beep(); //sonido
+                }
+            }
+        });
 
         //JTextField que limita el que solo se puedan escribir diez números.
         txtTelefono = new JTextField();

@@ -13,7 +13,6 @@ import java.awt.event.*;
  */
 public class Ventana4 extends JFrame implements ActionListener {
     
-    
     //Declaramos las propiedades
     private JButton btnAceptar, btnCancelar;    
     private JTextField txtIDTarjeta,txtNombreCliente,txtSaldo;

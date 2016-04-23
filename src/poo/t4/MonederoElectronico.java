@@ -39,13 +39,12 @@ public class MonederoElectronico {
             } else {
                 return false;
             }
-        }}
-    
+        }
+    }
 
-    
     protected static boolean cargoATarjeta(String IDTarjeta, double cargo) {
         // Debe sacar el saldo que tenga tal ID        
-        double monto = obtenerSaldoDeTablaMonedero(IDTarjeta);        
+        double monto = obtenerSaldoDeTablaMonedero(IDTarjeta);
         // Debe comparar el saldo que se tiene contra el que se pide.
         // Si se tiene suficiente saldo, se debe modificar la base de datos. En caso de no
         // contar con fondos suficientes, el método debe regresar False        
@@ -56,55 +55,50 @@ public class MonederoElectronico {
             return false;
         }
     }
-    
+
     // Devolverá un Arreglo de Strings doble. Regresará Null en caso de no haber encontrado dicha tarjeta.
-    public static String[] informacionTarjeta(String IDTarjeta) {        
+    public static String[] informacionTarjeta(String IDTarjeta) {
         double saldo = obtenerSaldoDeTablaMonedero(IDTarjeta);
-        if (saldo<0){
+        if (saldo < 0) {
             return null;
-        } else{
+        } else {
             String[] informacion = new String[2];
             String nombreCliente = Cliente.obtenerNombreClienteConMonedero(IDTarjeta);
-            if(nombreCliente == null){
+            if (nombreCliente == null) {
                 nombreCliente = "=TARJETA SIN CLIENTE ASIGNADO=";
-            }            
+            }
             informacion[0] = nombreCliente;
             informacion[1] = Double.toString(saldo);
-            
+
             return informacion;
         }
     }
-    
-    
+
     // Obtiene el Saldo que hay en el monedero. En caso de no existir en la base de datos, regresa un número negativo
-    private static double obtenerSaldoDeTablaMonedero(String IDTarjeta){        
+    private static double obtenerSaldoDeTablaMonedero(String IDTarjeta) {
         try {
             mysqlConnection s = new mysqlConnection();
-        s.conexion();
-        Connection cc= s.conexion();
-        String select = "select clientes.nombre, tarjetas.saldo from tarjetas, clientes where tarjetas.NumTarjeta ="+IDTarjeta+" and clientes.numtarjetaC="+IDTarjeta;
-        ResultSet rs;
-        Statement stmt= cc.createStatement();
-        rs = stmt.executeQuery(select);
-        while ( rs.next() ) {
+            s.conexion();
+            Connection cc = s.conexion();
+            String select = "select clientes.nombre, tarjetas.saldo from tarjetas, clientes where tarjetas.NumTarjeta =" + IDTarjeta + " and clientes.numtarjetaC=" + IDTarjeta;
+            ResultSet rs;
+            Statement stmt = cc.createStatement();
+            rs = stmt.executeQuery(select);
+            while (rs.next()) {
                 sa = rs.getDouble("tarjetas.saldo");
-                               
-        }
-                 rs.close();
-                stmt.close();
+
             }
-                
-        catch (SQLException ex) {
+            rs.close();
+            stmt.close();
+        } catch (SQLException ex) {
             Logger.getLogger(MonederoElectronico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+
         }
-            catch (Exception e){
-                    
-                    }
-    
-    
+
         return sa;
     }
-    
+
     // Modifica el saldo el saldo del Monedero en las tablas
     private static boolean modificarSaldoDeTablaMonedero(String IDTarjeta, double monto) {
         try {
@@ -112,24 +106,21 @@ public class MonederoElectronico {
             mysqlConnection s = new mysqlConnection();
             s.conexion();
             Connection cc = s.conexion();
-            
-                String query = "update tarjetas set saldo ="+monto+" where NumTarjeta = "+IDTarjeta;
-                PreparedStatement pago = cc.prepareStatement(query);
-                
-                
-                 int q = pago.executeUpdate();
-                
-                 
-                if (q>0)
-                {
-                    b = true;
-                }
+
+            String query = "update tarjetas set saldo =" + monto + " where NumTarjeta = " + IDTarjeta;
+            PreparedStatement pago = cc.prepareStatement(query);
+
+            int q = pago.executeUpdate();
+
+            if (q > 0) {
+                b = true;
+            }
                 // execute the java preparedstatement
-               
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(MonederoElectronico.class.getName()).log(Level.SEVERE, null, ex);
-        } return b;
-    } 
+        }
+        return b;
+    }
 
 }

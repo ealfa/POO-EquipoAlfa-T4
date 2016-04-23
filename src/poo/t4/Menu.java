@@ -86,9 +86,17 @@ public class Menu extends JFrame implements ActionListener {
                 Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e.getSource() == cmdRegistroCompra){
-            Ventana2 ventana2 = new Ventana2();
+            try {
+                Ventana2 ventana2 = new Ventana2();
+            } catch (IOException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (e.getSource() == cmdPagos){
-            Ventana3 ventana3 = new Ventana3();
+            try {
+                Ventana3 ventana3 = new Ventana3();
+            } catch (IOException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (e.getSource() == cmdConsultaSaldo){
             Ventana4 ventana4 = new Ventana4();
         } else if (e.getSource() == cmdConfiguracion){
