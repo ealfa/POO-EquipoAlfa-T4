@@ -25,7 +25,7 @@ public class Ventana1 extends JFrame implements ActionListener {
     //Constructor
     public Ventana1() {
         super("Alta de Cliente");
-        setContentPane(new JLabel(new ImageIcon("/Users/jesusignacio159/NetBeansProjects/POO-T4/logo.png")));
+        setContentPane(new JLabel(new ImageIcon("/Users/jesusignacio159/Downloads/Drawing-layerExport.jpeg")));
         setSize(400, 230);  //Establecemos las dimensiones del formulario (ancho x alto)
         setLocation(440, 100); //Establecemos la ubicación en pantalla (x,y)
         setResizable(false); //Para que no se pueda modificar el tamaño de la ventana

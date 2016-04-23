@@ -42,7 +42,7 @@ public class Menu extends JFrame implements ActionListener {
         //Paso 2. Creamos los JMenus
         menuClientes = new JMenu("Clientes");
         menuMovimientos = new JMenu("Movimientos");
-        menuConfiguracion = new JMenu("Configuracion");
+        menuConfiguracion = new JMenu("Configuración");
         
         //Paso 3. Creamos la Barra JMenuBar
         braMenu = new JMenuBar();
