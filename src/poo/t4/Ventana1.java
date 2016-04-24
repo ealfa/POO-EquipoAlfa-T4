@@ -27,12 +27,6 @@ public class Ventana1 extends JFrame implements ActionListener {
     //Declaramos las propiedades
     private JButton btnAceptar, btnCancelar;
     private JTextField txtNombre, txtEmail, txtTelefono, txtIDTarjeta;
-    
-    Image imagen;
-    ImageIcon iconoDeImagen;
-    JLabel backgroundImage;
-    
-    JApplet jsdf;
 
     //Constructor
     public Ventana1() {
@@ -47,13 +41,11 @@ public class Ventana1 extends JFrame implements ActionListener {
         JLabel lblTelefono = new JLabel("Teléfono:");
         JLabel lblIDTarjeta = new JLabel("No. Tarjeta:");
         
-        JLabel lblimagen = new JLabel("");
-        ImageIcon image = new ImageIcon();
-        //Image image = new ImageIcon(this.getClass().getResource("Drawing-layerExport.jpeg")).getImage();
-        //lblimagen.setIcon(new ImageIcon(image));
-        lblimagen.setIcon(image);
-        lblimagen.setBounds(0, 0, this.getWidth(), this.getHeight());
-        this.getContentPane().add(lblimagen);
+        JLabel lblImagen = new JLabel("");
+        Image image = new ImageIcon(this.getClass().getResource("Drawing-layerExport.jpeg")).getImage();
+        lblImagen.setIcon(new ImageIcon(image));
+        lblImagen.setBounds(0, 0, this.getWidth(), this.getHeight());
+        this.getContentPane().add(lblImagen);
 
         //Paso 3. Vamos a crear un campo de texto
         //JTextField que limita el que solo se puedan escribir letras
@@ -70,9 +62,10 @@ public class Ventana1 extends JFrame implements ActionListener {
         //JTextField que limita el que solo se puedan escribir letras, numero, guion bajo, guion, punto y arroba
         txtEmail = new JTextField();
         txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 char c = evt.getKeyChar();
-                if (!(Character.isLetter(c) || Character.isDigit(c) || (c == KeyEvent.VK_MINUS) || (c == KeyEvent.VK_UNDERSCORE) || (c == KeyEvent.VK_AT) || (c == KeyEvent.VK_PERIOD || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))) {
+                if (!((Character.isLetter(c)) || (Character.isDigit(c)) || (c == KeyEvent.VK_MINUS) || (c == KeyEvent.VK_UNDERSCORE) || (c == KeyEvent.VK_AT) || (c == KeyEvent.VK_PERIOD) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
                     evt.consume();
                 }
             }
@@ -133,6 +126,8 @@ public class Ventana1 extends JFrame implements ActionListener {
         pnlContenido.add(txtIDTarjeta);
         pnlContenido.add(btnAceptar);
         pnlContenido.add(btnCancelar);
+        
+        pnlContenido.add(lblImagen);
 
         //Paso 8. Asociamos el contenedor a la ventana
         setContentPane(pnlContenido);

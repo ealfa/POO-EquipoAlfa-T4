@@ -36,6 +36,7 @@ public class Menu extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Programamos la X para cerrar la ventana               
         setLayout(new FlowLayout());
         setResizable(false);
+        
 
         //Paso 1. Crear los JMenuItems
         cmdAltaCliente = new JMenuItem("Alta de Cliente");
@@ -48,6 +49,12 @@ public class Menu extends JFrame implements ActionListener {
         menuClientes = new JMenu("Clientes");
         menuMovimientos = new JMenu("Movimientos");
         menuConfiguracion = new JMenu("Configuración");
+        
+        JLabel lblImagen = new JLabel("");
+        Image image = new ImageIcon(this.getClass().getResource("Drawing-layerExport.jpeg")).getImage();
+        lblImagen.setIcon(new ImageIcon(image));
+        lblImagen.setBounds(0, 0, this.getWidth(), this.getHeight());
+        this.getContentPane().add(lblImagen);
 
         //Paso 3. Creamos la Barra JMenuBar
         braMenu = new JMenuBar();
@@ -64,6 +71,13 @@ public class Menu extends JFrame implements ActionListener {
         braMenu.add(menuMovimientos);
         braMenu.add(menuConfiguracion);
         setJMenuBar(braMenu);
+        
+        JPanel pnlContenido = new JPanel(null); 
+        
+        pnlContenido.add(lblImagen);
+        
+        setContentPane(pnlContenido);
+        
         setVisible(true);
 
         //Paso 6. Que los comandos ESCUCHEN

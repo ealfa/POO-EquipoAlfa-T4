@@ -5,6 +5,7 @@
  */
 package poo.t4;
 
+import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.event.*;
@@ -29,6 +30,12 @@ public class Ventana4 extends JFrame implements ActionListener {
         JLabel lblIDTarjeta = new JLabel("No. Tarjeta:");
         JLabel lblNombreCliente = new JLabel("Cliente: ");
         JLabel lblSaldo = new JLabel("Saldo:");
+        
+        JLabel lblImagen = new JLabel("");
+        Image image = new ImageIcon(this.getClass().getResource("Drawing-layerExport.jpeg")).getImage();
+        lblImagen.setIcon(new ImageIcon(image));
+        lblImagen.setBounds(0, 0, this.getWidth(), this.getHeight());
+        this.getContentPane().add(lblImagen);
         
         //Paso 3. Vamos a crear un campo de texto
         // JTextfield que solo permite escribir numeros
@@ -73,6 +80,8 @@ public class Ventana4 extends JFrame implements ActionListener {
         pnlContenido.add(txtSaldo);
         pnlContenido.add(btnAceptar);
         pnlContenido.add(btnCancelar);
+        
+        pnlContenido.add(lblImagen);
 
         //Paso 8. Asociamos el contenedor a la ventana
         setContentPane(pnlContenido);

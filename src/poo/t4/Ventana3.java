@@ -5,6 +5,7 @@
  */
 package poo.t4;
 
+import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.event.*;
@@ -30,6 +31,12 @@ public class Ventana3 extends JFrame implements ActionListener {
         //Paso 2. Vamos a crear una etiqueta
         JLabel lblIDTarjeta = new JLabel("No. Tarjeta:");
         JLabel lblCantidad = new JLabel("Cantidad:");
+        
+        JLabel lblImagen = new JLabel("");
+        Image image = new ImageIcon(this.getClass().getResource("Drawing-layerExport.jpeg")).getImage();
+        lblImagen.setIcon(new ImageIcon(image));
+        lblImagen.setBounds(0, 0, this.getWidth(), this.getHeight());
+        this.getContentPane().add(lblImagen);
         
         //Paso 3. Vamos a crear un campo de texto
         //JTextField que limita el que solo se puedan escribir numeros
@@ -77,6 +84,8 @@ public class Ventana3 extends JFrame implements ActionListener {
         pnlContenido.add(txtCantidad);
         pnlContenido.add(btnAceptar);
         pnlContenido.add(btnCancelar);
+        
+        pnlContenido.add(lblImagen);
 
         //Paso 8. Asociamos el contenedor a la ventana
         setContentPane(pnlContenido);
