@@ -40,7 +40,7 @@ public class Ventana1 extends JFrame implements ActionListener {
         JLabel lblEmail = new JLabel("Email:");
         JLabel lblTelefono = new JLabel("Teléfono:");
         JLabel lblIDTarjeta = new JLabel("No. Tarjeta:");
-        
+
         JLabel lblImagen = new JLabel("");
         Image image = new ImageIcon(this.getClass().getResource("Drawing-layerExport.jpeg")).getImage();
         lblImagen.setIcon(new ImageIcon(image));
@@ -61,7 +61,7 @@ public class Ventana1 extends JFrame implements ActionListener {
 
         //JTextField que limita el que solo se puedan escribir letras, numero, guion bajo, guion, punto y arroba
         txtEmail = new JTextField();
-        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+        /*txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 char c = evt.getKeyChar();
@@ -69,7 +69,7 @@ public class Ventana1 extends JFrame implements ActionListener {
                     evt.consume();
                 }
             }
-        });
+        });*/
 
         //JTextField que limita el que solo se puedan escribir números
         txtTelefono = new JTextField();
@@ -126,7 +126,7 @@ public class Ventana1 extends JFrame implements ActionListener {
         pnlContenido.add(txtIDTarjeta);
         pnlContenido.add(btnAceptar);
         pnlContenido.add(btnCancelar);
-        
+
         pnlContenido.add(lblImagen);
 
         //Paso 8. Asociamos el contenedor a la ventana
@@ -138,12 +138,13 @@ public class Ventana1 extends JFrame implements ActionListener {
 
         //Paso 10. Hacemos visible la ventana
         setVisible(true);
+
     }
 
     private void salir() {
         dispose();
     }
-    
+
     public void close() {
         WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
@@ -165,7 +166,7 @@ public class Ventana1 extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "No se ha podido agregar", "Advertencia", 0);
                 }
             } catch (SQLException ex) {
-                
+
             }
             close();
         } else {
