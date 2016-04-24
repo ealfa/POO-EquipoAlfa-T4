@@ -40,11 +40,11 @@ public class Bitacora {
       preparedStmt.executeUpdate();
         }
       catch (SQLException e){
-          JOptionPane.showMessageDialog(null, "Error"+e);
+          
       }
       
         catch(Exception r){
-            JOptionPane.showMessageDialog(null, "Error"+r);
+            
         }
             return true;
         }

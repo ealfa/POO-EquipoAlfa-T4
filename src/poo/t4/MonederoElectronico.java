@@ -118,7 +118,7 @@ public class MonederoElectronico {
                 // execute the java preparedstatement
 
         } catch (SQLException ex) {
-            Logger.getLogger(MonederoElectronico.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return b;
     }

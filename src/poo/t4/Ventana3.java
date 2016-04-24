@@ -5,6 +5,7 @@
  */
 package poo.t4;
 
+import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -35,26 +36,21 @@ public class Ventana3 extends JFrame implements ActionListener {
         txtIDTarjeta = new JTextField();
         txtIDTarjeta.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
-                    e.consume();  // ignore event
-                    getToolkit().beep(); //sonido
+            public void keyTyped(KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!(Character.isDigit(c) || (c == KeyEvent.VK_MINUS) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
+                    evt.consume();
+                    getToolkit().beep();
                 }
             }
-        });
+        });  
         //JTextField que solo permite numeros, punto y coma
         txtCantidad = new JTextField();
-        txtCantidad.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if ((((c < '0') || (c > '9')) && ((c != '.') && (c != ','))) && (c != KeyEvent.VK_BACK_SPACE)) {
-                    e.consume();  // ignore event
-                    getToolkit().beep(); //sonido
-                } else if (txtCantidad.getText()!= null && ((txtCantidad.getText().contains(".") && ((c == ',') || (c == '.'))) || (txtCantidad.getText().contains(",")&& ((c == ',') || (c == '.'))))){
-                    e.consume();  // ignore event
-                    getToolkit().beep(); //sonido
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!(Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || c == KeyEvent.VK_DELETE)) {
+                    evt.consume();
                 }
             }
         });
@@ -98,6 +94,11 @@ public class Ventana3 extends JFrame implements ActionListener {
         dispose();
     }
     
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAceptar) {
@@ -110,6 +111,7 @@ public class Ventana3 extends JFrame implements ActionListener {
             } else{
                 JOptionPane.showMessageDialog(null, "No se ha podido hacer el pago", "Advertencia", 0);                
             }
+            close();
         } else {
             salir();
         }

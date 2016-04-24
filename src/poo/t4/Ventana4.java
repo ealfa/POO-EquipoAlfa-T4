@@ -5,6 +5,7 @@
  */
 package poo.t4;
 
+import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.event.*;
 /**
@@ -88,6 +89,11 @@ public class Ventana4 extends JFrame implements ActionListener {
         dispose();
     }
     
+    public void close() {
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAceptar) {
@@ -103,6 +109,7 @@ public class Ventana4 extends JFrame implements ActionListener {
                 txtNombreCliente.setText(datosTarjeta[0]);
                 txtSaldo.setText(datosTarjeta[1]);
             }
+            close();
         } else {
             salir();
         }
