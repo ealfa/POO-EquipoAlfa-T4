@@ -24,7 +24,20 @@ public class Cliente {
 //    private Long idTarjeta;
     //Método que hace la conexión con el GUI. Debe devolver si se pudo agregar o no el cliente.
     public static boolean agregarCliente(String nombreDeCliente, String email, String telefono, String IDTarjeta) throws SQLException {
+        if (!(("".equals(nombreDeCliente) || "".equals(email) || "".equals(telefono) || "".equals(IDTarjeta)))) {
+            for (int i = 0; i < 100; i++) {
+                if ("".equals(MonederoElectronico.clientes[0][i])) {
+                    MonederoElectronico.clientes[0][i] = nombreDeCliente;
+                    MonederoElectronico.clientes[1][i] = email;
+                    MonederoElectronico.clientes[2][i] = telefono;
+                    MonederoElectronico.clientes[3][i] = IDTarjeta;
 
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Al menos uno de los cuadros de texto no estan completos. Por favor complete los datos y vuelva a introducir los datos.");
+        }
+        
         try {
             mysqlConnection con = new mysqlConnection();
             con.conexion();
@@ -46,9 +59,9 @@ public class Cliente {
             stTarjetas.executeUpdate();
 
         } catch (SQLException e) {
-            
+
         } catch (Exception r) {
-            
+
         }
 
         return true;

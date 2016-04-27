@@ -96,13 +96,12 @@ public class Ventana5 extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAceptar) {
             String configuracion = txtConfiguracion.getText();
-            /*
-            if (MonederoElectronico.agregarConfiguracino(configuracion)){
+            if (MonederoElectronico.agregarConfiguracion(configuracion)){
                 JOptionPane.showMessageDialog(null, "Se ha agregado con éxito", "", -1);
                 salir();
-            } else{
-                JOptionPane.showMessageDialog(null, "No se ha podido agregar", "Advertencia", 0);                
-            }     */       
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha podido agregar", "Advertencia", 0);
+            }     
             close();
         } else {
             salir();

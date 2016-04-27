@@ -5,6 +5,7 @@
  */
 package poo.t4;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,8 +29,39 @@ public class MonederoElectronico {
 //    private double saldo;
     private static Double sa;
     private static boolean b = false;
+    static int configuracion = 0;
+
+    //Nombre Cliente, Email, Telefono, idTarjeta, Ticket, Saldo
+    static String[][] clientes = new String[6][100];
+
+    public MonederoElectronico() {
+        for (int i = 0; i < 100; i++) {
+            this.clientes[0][i] = "";
+            this.clientes[1][i] = "";
+            this.clientes[2][i] = "";
+            this.clientes[3][i] = "";
+            this.clientes[4][i] = "";
+            this.clientes[5][i] = "0";
+        }
+    }
 
     public static boolean pago(String IDTarjeta, String cantidad) {
+        if (!("".equals(IDTarjeta) || "".equals(cantidad))) {
+            for (int i = 0; i < 100; i++) {
+                if (MonederoElectronico.clientes[3][i] == null ? IDTarjeta == null : MonederoElectronico.clientes[3][i].equals(IDTarjeta)) {
+                    if (!(Integer.parseInt(cantidad) > Integer.parseInt(MonederoElectronico.clientes[5][i]))) {
+                        int saldo = Integer.parseInt(MonederoElectronico.clientes[5][i]) - Integer.parseInt(cantidad);
+                        MonederoElectronico.clientes[5][i] = Integer.toString(saldo);
+                    } else {
+                        JOptionPane.showConfirmDialog(null, "El cliente no tiene suficiente saldo para hacer el pago.");
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(null, "El Id de la Tajeta del Cliente no se encuentra en nuestra base de datos. De favor introduzcala nuevamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Al menos uno de los cuadros de texto no estan completos. Por favor complete los datos y vuelva a introducir los datos.");
+        }
+
         if (cantidad.equalsIgnoreCase(".") || cantidad.equalsIgnoreCase(",")) {
             return false;
         } else {
@@ -58,6 +90,18 @@ public class MonederoElectronico {
 
     // Devolverá un Arreglo de Strings doble. Regresará Null en caso de no haber encontrado dicha tarjeta.
     public static String[] informacionTarjeta(String IDTarjeta) {
+        if (!("".equals(IDTarjeta))) {
+            for (int i = 0; i < 100; i++) {
+                if (IDTarjeta == null ? MonederoElectronico.clientes[3][i] == null : IDTarjeta.equals(MonederoElectronico.clientes[3][i])) {
+                    JOptionPane.showMessageDialog(null, "Nombre Del Cliente: " + MonederoElectronico.clientes[0][i]);
+                    JOptionPane.showMessageDialog(null, "Saldo: " + MonederoElectronico.clientes[5][i]);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "El Id de la Tajeta del Cliente no se encuentra en nuestra base de datos. De favor introduzcala nuevamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Al menos uno de los cuadros de texto no estan completos. Por favor complete los datos y vuelva a introducir los datos.");
+        }
+
         double saldo = obtenerSaldoDeTablaMonedero(IDTarjeta);
         if (saldo < 0) {
             return null;
@@ -115,12 +159,16 @@ public class MonederoElectronico {
             if (q > 0) {
                 b = true;
             }
-                // execute the java preparedstatement
+            // execute the java preparedstatement
 
         } catch (SQLException ex) {
-            
+
         }
         return b;
     }
 
+    public static boolean agregarConfiguracion(String configuracion) {
+        MonederoElectronico.configuracion = Integer.parseInt(configuracion);
+        return true;
+    }
 }
